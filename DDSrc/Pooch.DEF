@@ -1,0 +1,36 @@
+-----------------------------------------------------------------------------
+  DATE: 06/22/2008      TIME: 19:59                                  PAGE:  1
+  FILE DEFINITION FOR FILE: POOCH (# 1)
+-----------------------------------------------------------------------------
+  DRIVER NAME               : DATAFLEX
+  FILE ROOT NAME            : Pooch
+  USER DISPLAY NAME         : Pooch
+  DATAFLEX FILE NAME        : POOCH
+-----------------------------------------------------------------------------
+  RECORD LENGTH             : 56        ( USED: 55 )
+  MAX NUMBER OF RECORDS     : 10000     ( USED: 0 )
+  FILE COMPRESSION          : NONE
+  RE-USE DELETED SPACE      : YES
+  LOCKING TYPE              : FILE
+  HEADER INTEGRITY CHECKING : YES
+  TRANSACTION TYPE          : CLIENT ATOMIC
+  RECORD IDENTITY INDEX     : 0 ( 0 , 0 )
+  FILE LOGIN PARAMETER      : 
+  SYSTEM FILE               : NO 
+-----------------------------------------------------------------------------
+
+NUM  FIELD NAME       TYPE SIZE  OFFST IX   RELATES TO FILE.FIELD
+---  ---------------  ---- ----- ----- --   ---------------------------------
+  1  NAME             ASC     12     1  1   
+  2  BREED            ASC     20    13      
+  3  AGE              NUM    2.0    33      
+  4  CREATE_DATE      DAT      6    34      
+  5  CREATE_TIME      ASC      8    37      
+  6  CHANGE_DATE      DAT      6    45      
+  7  CHANGE_TIME      ASC      8    48      
+
+
+INDEX# FIELDS          DES U/C    LENGTH LEVELS SEGMENTS MODE
+------ --------------- --- ---    ------ ------ -------- -------
+  1    NAME            NO  NO       12     3       1     ON-LINE
+

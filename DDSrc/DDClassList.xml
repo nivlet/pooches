@@ -1,0 +1,1 @@
+<DataDictionaryList xmlns="http://www.dataaccess.com/VisualDataFlex/2008/DataDictionaryList/"><Tables><Table><tableNumber>1</tableNumber><tableName>POOCH</tableName><DDClasses><DDClass><className>cPoochDataDictionary</className><classFile>cPoochDataDictionary.dd</classFile><preferred>true</preferred></DDClass></DDClasses></Table></Tables></DataDictionaryList>

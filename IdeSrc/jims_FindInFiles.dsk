@@ -1,0 +1,10 @@
+[Header]
+Mask=*.*
+SubDirectories=1
+Location=C:\Vdf\Vdf16.1\VdfClass\III.Pooches\IdeSrc\JimS_FindInFiles.dsk
+[C:\Vdf\Vdf16.1\VDFClass\III.Pooches\AppSrc]
+IsEnabled=1
+[C:\Vdf\Vdf16.1\VDFClass\III.Pooches\DDSrc]
+IsEnabled=1
+[C:\Vdf\Vdf16.1\VDFClass\III.Pooches\AppHtml]
+IsEnabled=1
