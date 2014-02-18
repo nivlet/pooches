@@ -2,6 +2,8 @@ Use DataDict.pkg
 
 Open POOCH
 
+Register_Function ValidateAge Integer iFieldNum Integer iAge Returns Integer
+
 Class cPoochDataDictionary is a DataDictionary
     
     Procedure Construct_Object
@@ -13,6 +15,97 @@ Class cPoochDataDictionary is a DataDictionary
         Set Foreign_Field_Option DD_INDEXFIELD DD_NOPUT to True
         Set Foreign_Field_Option DD_DEFAULT DD_DISPLAYONLY to True
 
+        Set Field_Validate_msg Field POOCH.AGE to get_ValidateAge
+
+        Set Field_Option Field POOCH.CREATE_DATE DD_DISPLAYONLY to True
+
+        Set Field_Option Field POOCH.CREATE_TIME DD_DISPLAYONLY to True
+
+        Set Field_Option Field POOCH.CHANGE_DATE DD_DISPLAYONLY to True
+
+        Set Field_Option Field POOCH.CHANGE_TIME DD_DISPLAYONLY to True
     End_Procedure
     
+    Function Request_Validate Returns Boolean
+        Boolean bFail
+        Date dToday
+        Integer iHour
+        String sMsg
+        
+        Forward Get Request_Validate to bFail
+        
+        If (not(bFail)) Begin
+            Sysdate dToday iHour
+            
+            If (iHour >= 19) Begin
+                Move ("Saves cannot be performed after the hour of 07:00 PM\n") to sMsg
+                Send Info_Box sMsg "Pooches"
+                Move True to bFail
+            End
+        End
+        Function_Return bFail        
+    End_Function
+    
+    Function ValidateAge Integer iField Integer iAge Returns Integer
+        Integer iRetVal
+        String sMsg
+        
+        Move 0 to iRetVal
+        If (iAge >= 20) Begin
+            Move "Age must be less than 20." to sMsg
+            Send Info_Box sMsg "Pooches"
+            Move 1 to iRetVal   
+        End
+        Function_Return iRetVal
+    End_Function
+    
+    Procedure Update
+        Date dDay
+        Integer iHour iMin iSec iChanged
+        String sTime
+        Handle hoServer
+        Boolean bCurrent
+        
+        Forward Send Update
+        
+        Sysdate dDay iHour iMin iSec
+        Get Server to hoServer
+        Get HasRecord of hoServer to bCurrent
+        
+        If (bCurrent) Begin
+            Get FormatTime iHour iMin iSec to sTime
+           
+            Move dDay to POOCH.CHANGE_DATE
+            Move sTime to POOCH.CHANGE_TIME
+        End
+    End_Procedure
+    
+    Procedure Creating
+        Date dDay
+        Integer iHour iMin iSec
+        String sTime
+        
+        Forward Send Creating
+        
+        Sysdate dDay iHour iMin iSec
+        
+        Get FormatTime iHour iMin iSec to sTime
+                
+        Move dDay to POOCH.CREATE_DATE
+        Move sTime to POOCH.CREATE_TIME
+    End_Procedure
+    
+    Function FormatTime Integer iHour Integer iMin Integer iSec ;
+        Returns String
+        
+        String sMin sSec
+        
+        Move (String(iMin)) to sMin
+        Move (String(iSec)) to sSec
+        
+        If (Length(sMin) = 1) Move ("0" + sMin) to sMin
+        If (Length(sSec) = 1) Move ("0" + sSec) to sSec
+        
+        Function_Return (String(iHour) + ":" + sMin + ":" + sSec)
+    End_Function
 End_Class

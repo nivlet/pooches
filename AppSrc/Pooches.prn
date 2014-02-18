@@ -1,4 +1,4 @@
-Compiling Program: C:\Vdf\Vdf16.1\VdfClass\III.Pooches\AppSrc\Pooches.src
+Compiling Program: C:\Users\philip.waller\Documents\Training\Assignments\Day 10 021714\PPW III.Pooches\AppSrc\Pooches.src
 Memory Available: 2147483647
 1>
 1>
@@ -1711,7 +1711,7 @@ Including file: Dfabout.pkg    (C:\Program Files (x86)\Visual DataFlex 16.1\Pkg\
 70620>>>        Send Destroy of hoObj // when done, it will be destroyed
 70621>>>End_procedure
 70622>        Use Pooches.vw
-Including file: Pooches.vw    (C:\Vdf\Vdf16.1\VdfClass\III.Pooches\AppSrc\Pooches.vw)
+Including file: Pooches.vw    (C:\Users\philip.waller\Documents\Training\Assignments\Day 10 021714\PPW III.Pooches\AppSrc\Pooches.vw)
 70622>>>Use dfClient.pkg
 70622>>>Use DataDict.pkg
 70622>>>Use dfTable.pkg
@@ -1719,11 +1719,13 @@ Including file: Pooches.vw    (C:\Vdf\Vdf16.1\VdfClass\III.Pooches\AppSrc\Pooche
 70622>>>Use File_dlg.Pkg
 70622>>>
 70622>>>Use cPoochDataDictionary.dd
-Including file: cPoochDataDictionary.dd    (C:\Vdf\Vdf16.1\VdfClass\III.Pooches\DDSrc\cPoochDataDictionary.dd)
+Including file: cPoochDataDictionary.dd    (C:\Users\philip.waller\Documents\Training\Assignments\Day 10 021714\PPW III.Pooches\DDSrc\cPoochDataDictionary.dd)
 70622>>>>>Use DataDict.pkg
 70622>>>>>
 70622>>>>>Open POOCH
-Including file: Pooch.FD    (C:\Vdf\Vdf16.1\VdfClass\III.Pooches\DDSrc\Pooch.FD)
+Including file: Pooch.FD    (C:\Users\philip.waller\Documents\Training\Assignments\Day 10 021714\PPW III.Pooches\DDSrc\Pooch.FD)
+70624>>>>>
+70624>>>>>Register_Function ValidateAge Integer iFieldNum Integer iAge Returns Integer
 70624>>>>>
 70624>>>>>Class cPoochDataDictionary is a DataDictionary
 70625>>>>>    
@@ -1736,208 +1738,563 @@ Including file: Pooch.FD    (C:\Vdf\Vdf16.1\VdfClass\III.Pooches\DDSrc\Pooch.FD)
 70632>>>>>        Set Foreign_Field_Option DD_INDEXFIELD DD_NOPUT to True
 70633>>>>>        Set Foreign_Field_Option DD_DEFAULT DD_DISPLAYONLY to True
 70634>>>>>
-70634>>>>>    End_Procedure
-70635>>>>>    
-70635>>>>>End_Class
-70636>>>
-70636>>>DEFERRED_VIEW Activate_oPoochesView FOR ;;Object oPoochesView is a dbView
-70661>>>    Object oPooch_DD is a cPoochDataDictionary
-70663>>>    End_Object
-70664>>>
-70664>>>    Set Border_Style to Border_Thick
-70665>>>    Set Location to 10 10
-70666>>>    Set Size to 272 468
-70667>>>
-70667>>>    Set Main_DD to oPooch_DD
-70668>>>    Set Server to oPooch_DD
-70669>>>    Set Label to "Pooches"
-70670>>>
-70670>>>    Object oPooch_Grid is a dbGrid
-70672>>>        Set Main_File to Pooch.File_Number
-70673>>>        Set Size to 166 443
-70674>>>        Set Location to 7 12
-70675>>>        Set peAnchors to anAll
-70676>>>        Set Wrap_State to TRUE
-70677>>>
-70677>>>        Begin_Row
-70680>>>            Entry_Item Pooch.Name
-70681>>>            Entry_Item Pooch.Breed
-70682>>>            Entry_Item Pooch.Age
-70683>>>            Entry_Item Pooch.Create_date
-70684>>>            Entry_Item Pooch.Create_time
-70685>>>            Entry_Item Pooch.Change_date
-70686>>>            Entry_Item Pooch.Change_time
-70687>>>        End_Row
-70692>>>
-70692>>>        Set Form_Width   item 0 to 62
-70693>>>        Set Header_Label item 0 to "Name"
-70694>>>
-70694>>>        Set Form_Width   item 1 to 100
-70695>>>        Set Header_Label item 1 to "Breed"
-70696>>>
-70696>>>        Set Form_Width   item 2 to 40
-70697>>>        Set Header_Label item 2 to "Age"
-70698>>>
-70698>>>        Set Form_Width   item 3 to 50
-70699>>>        Set Header_Label item 3 to "Create Date"
-70700>>>
-70700>>>        Set Form_Width   item 4 to 58
-70701>>>        Set Header_Label item 4 to "Create Time"
-70702>>>
-70702>>>        Set Form_Width   item 5 to 60
-70703>>>        Set Header_Label item 5 to "Change Date"
-70704>>>
-70704>>>        Set Form_Width   item 6 to 60
-70705>>>        Set Header_Label item 6 to "Change Time"
-70706>>>        Set peResizeColumn to rcAll
-70707>>>
-70707>>>    End_Object    // oPooch_Grid
-70708>>>
-70708>>>    Object oDeleteBtn is a Button
-70710>>>        Set Label to "Delete All"
-70711>>>        Set Location to 182 123
-70712>>>        Set peAnchors to anBottomLeft
-70713>>>
-70713>>>        Procedure OnClick
-70716>>>
-70716>>>        End_Procedure // OnClick
-70717>>>    End_Object    // oDeleteBtn
-70718>>>
-70718>>>    Object oImportGrp is a Group
-70720>>>        Set Size to 58 211
-70721>>>        Set Location to 202 14
-70722>>>        Set peAnchors to anBottomLeftRight
-70723>>>        Set Label to "Import"
-70724>>>
-70724>>>        Object oOpenImport is a OpenDialog
-70726>>>            Set Dialog_Caption to "Select a file"
-70727>>>        End_Object    // oOpenImport
-70728>>>
-70728>>>        Object oInputPath is a Form
-70730>>>            Set Label to "Input File (.csv)"
-70731>>>            Set Size to 13 141
-70732>>>            Set Location to 20 4
-70733>>>            Set peAnchors to anLeftRight
-70734>>>            Set Label_Col_Offset to 0
-70735>>>            Set Label_Justification_Mode to jMode_Top
-70736>>>        End_Object    // oInputPath
-70737>>>
-70737>>>        Object oBrowse is a Button
-70739>>>            Set Label to "Browse"
-70740>>>            Set Location to 18 154
-70741>>>            Set peAnchors to anBottomRight
+70634>>>>>        Set Field_Validate_msg Field POOCH.AGE to get_ValidateAge
+70635>>>>>
+70635>>>>>        Set Field_Option Field POOCH.CREATE_DATE DD_DISPLAYONLY to True
+70636>>>>>
+70636>>>>>        Set Field_Option Field POOCH.CREATE_TIME DD_DISPLAYONLY to True
+70637>>>>>
+70637>>>>>        Set Field_Option Field POOCH.CHANGE_DATE DD_DISPLAYONLY to True
+70638>>>>>
+70638>>>>>        Set Field_Option Field POOCH.CHANGE_TIME DD_DISPLAYONLY to True
+70639>>>>>    End_Procedure
+70640>>>>>    
+70640>>>>>    Function Request_Validate Returns Boolean
+70642>>>>>        Boolean bFail
+70642>>>>>        Date dToday
+70642>>>>>        Integer iHour
+70642>>>>>        String sMsg
+70642>>>>>        
+70642>>>>>        Forward Get Request_Validate to bFail
+70644>>>>>        
+70644>>>>>        If (not(bFail)) Begin
+70646>>>>>            Sysdate dToday iHour
+70648>>>>>            
+70648>>>>>            If (iHour >= 19) Begin
+70650>>>>>                Move ("Saves cannot be performed after the hour of 07:00 PM\n") to sMsg
+70651>>>>>                Send Info_Box sMsg "Pooches"
+70652>>>>>                Move True to bFail
+70653>>>>>            End
+70653>>>>>>
+70653>>>>>        End
+70653>>>>>>
+70653>>>>>        Function_Return bFail        
+70654>>>>>    End_Function
+70655>>>>>    
+70655>>>>>    Function ValidateAge Integer iField Integer iAge Returns Integer
+70657>>>>>        Integer iRetVal
+70657>>>>>        String sMsg
+70657>>>>>        
+70657>>>>>        Move 0 to iRetVal
+70658>>>>>        If (iAge >= 20) Begin
+70660>>>>>            Move "Age must be less than 20." to sMsg
+70661>>>>>            Send Info_Box sMsg "Pooches"
+70662>>>>>            Move 1 to iRetVal   
+70663>>>>>        End
+70663>>>>>>
+70663>>>>>        Function_Return iRetVal
+70664>>>>>    End_Function
+70665>>>>>    
+70665>>>>>    Procedure Update
+70667>>>>>        Date dDay
+70667>>>>>        Integer iHour iMin iSec iChanged
+70667>>>>>        String sTime
+70667>>>>>        Handle hoServer
+70667>>>>>        Boolean bCurrent
+70667>>>>>        
+70667>>>>>        Forward Send Update
+70669>>>>>        
+70669>>>>>        Sysdate dDay iHour iMin iSec
+70673>>>>>        Get Server to hoServer
+70674>>>>>        Get HasRecord of hoServer to bCurrent
+70675>>>>>        
+70675>>>>>        If (bCurrent) Begin
+70677>>>>>            Get FormatTime iHour iMin iSec to sTime
+70678>>>>>           
+70678>>>>>            Move dDay to POOCH.CHANGE_DATE
+70679>>>>>            Move sTime to POOCH.CHANGE_TIME
+70680>>>>>        End
+70680>>>>>>
+70680>>>>>    End_Procedure
+70681>>>>>    
+70681>>>>>    Procedure Creating
+70683>>>>>        Date dDay
+70683>>>>>        Integer iHour iMin iSec
+70683>>>>>        String sTime
+70683>>>>>        
+70683>>>>>        Forward Send Creating
+70685>>>>>        
+70685>>>>>        Sysdate dDay iHour iMin iSec
+70689>>>>>        
+70689>>>>>        Get FormatTime iHour iMin iSec to sTime
+70690>>>>>                
+70690>>>>>        Move dDay to POOCH.CREATE_DATE
+70691>>>>>        Move sTime to POOCH.CREATE_TIME
+70692>>>>>    End_Procedure
+70693>>>>>    
+70693>>>>>    Function FormatTime Integer iHour Integer iMin Integer iSec ;        Returns String
+70695>>>>>        
+70695>>>>>        String sMin sSec
+70695>>>>>        
+70695>>>>>        Move (String(iMin)) to sMin
+70696>>>>>        Move (String(iSec)) to sSec
+70697>>>>>        
+70697>>>>>        If (Length(sMin) = 1) Move ("0" + sMin) to sMin
+70700>>>>>        If (Length(sSec) = 1) Move ("0" + sSec) to sSec
+70703>>>>>        
+70703>>>>>        Function_Return (String(iHour) + ":" + sMin + ":" + sSec)
+70704>>>>>    End_Function
+70705>>>>>End_Class
+70706>>>
+70706>>>DEFERRED_VIEW Activate_oPoochesView FOR ;;Object oPoochesView is a dbView
+70731>>>    Object oPooch_DD is a cPoochDataDictionary
+70733>>>    End_Object
+70734>>>
+70734>>>    Property String psMBLabel "Pooches"
+70736>>>    
+70736>>>    Set Border_Style to Border_Thick
+70737>>>    Set Location to 10 10
+70738>>>    Set Size to 272 468
+70739>>>
+70739>>>    Set Main_DD to oPooch_DD
+70740>>>    Set Server to oPooch_DD
+70741>>>    Set Label to "Pooches"
 70742>>>
-70742>>>
-70742>>>            Procedure OnClick
-70745>>>                Boolean bOk
-70745>>>                Get Show_Dialog of oOpenImport To bOk
-70746>>>                // JHS - Leave the rest of this to you.
-70746>>>            End_Procedure // OnClick
-70747>>>        End_Object    // oBrowse
-70748>>>
-70748>>>        Object oImport_Btn is a Button
-70750>>>            Set Label to "Import"
-70751>>>            Set Location to 42 155
-70752>>>            Set peAnchors to anBottomRight
-70753>>>
-70753>>>            Procedure OnClick
-70756>>>
-70756>>>            End_Procedure // OnClick
-70757>>>        End_Object    // oImport_Btn
-70758>>>
-70758>>>    End_Object    // oImportGrp
-70759>>>
-70759>>>    Object oReportGrp is a Group
-70761>>>        Set Size to 75 210
-70762>>>        Set Location to 185 242
-70763>>>        Set peAnchors to anBottomRight
-70764>>>        Set Label to "Report"
-70765>>>        
-70765>>>        Object oOutputFile is a Form
-70767>>>            Set Label to "Output File Name"
-70768>>>            Set Size to 13 85
-70769>>>            Set Location to 18 109
-70770>>>            Set peAnchors to anBottomRight
-70771>>>            Set Label_Col_Offset to 0
-70772>>>            Set Label_Justification_Mode to jMode_Top
-70773>>>        End_Object    // oOutputFile
+70742>>>    Object oPooch_Grid is a dbGrid
+70744>>>        Set Main_File to Pooch.File_Number
+70745>>>        Set Size to 166 443
+70746>>>        Set Location to 7 12
+70747>>>        Set peAnchors to anAll
+70748>>>        Set Wrap_State to TRUE
+70749>>>
+70749>>>        Begin_Row
+70752>>>            Entry_Item Pooch.Name
+70753>>>            Entry_Item Pooch.Breed
+70754>>>            Entry_Item Pooch.Age
+70755>>>            Entry_Item Pooch.Create_date
+70756>>>            Entry_Item Pooch.Create_time
+70757>>>            Entry_Item Pooch.Change_date
+70758>>>            Entry_Item Pooch.Change_time
+70759>>>        End_Row
+70764>>>
+70764>>>        Set Form_Width   item 0 to 62
+70765>>>        Set Header_Label item 0 to "Name"
+70766>>>
+70766>>>        Set Form_Width   item 1 to 100
+70767>>>        Set Header_Label item 1 to "Breed"
+70768>>>
+70768>>>        Set Form_Width   item 2 to 40
+70769>>>        Set Header_Label item 2 to "Age"
+70770>>>
+70770>>>        Set Form_Width   item 3 to 50
+70771>>>        Set Header_Label item 3 to "Create Date"
+70772>>>
+70772>>>        Set Form_Width   item 4 to 58
+70773>>>        Set Header_Label item 4 to "Create Time"
 70774>>>
-70774>>>        Object oTextBox1 is a TextBox
-70776>>>            Set Size to 10 50
-70777>>>            Set Location to 32 111
-70778>>>            Set Label to '(Folder same as input file.)'
-70779>>>        End_Object
+70774>>>        Set Form_Width   item 5 to 60
+70775>>>        Set Header_Label item 5 to "Change Date"
+70776>>>
+70776>>>        Set Form_Width   item 6 to 60
+70777>>>        Set Header_Label item 6 to "Change Time"
+70778>>>        Set peResizeColumn to rcAll
+70779>>>
+70779>>>    End_Object    // oPooch_Grid
 70780>>>
-70780>>>        Object oReport is a Button
-70782>>>            Set Label to "Report"
-70783>>>            Set Location to 52 142
-70784>>>            Set peAnchors to anBottomRight
+70780>>>    Object oDeleteBtn is a Button
+70782>>>        Set Label to "Delete All"
+70783>>>        Set Location to 182 123
+70784>>>        Set peAnchors to anBottomLeft
 70785>>>
-70785>>>            Procedure OnClick
-70788>>>
-70788>>>            End_Procedure // OnClick
-70789>>>        End_Object    // oReport
-70790>>>
-70790>>>    End_Object    // oReportGrp
-70791>>>
-70791>>>CD_End_Object    // oPoochesView
-70793>>>>
-70793>
-70793>        Procedure Activate_About
-70796>            Send DoAbout "" "" "" "" ""
-70797>        End_Procedure
-70798>
-70798>    End_Object
-70799>
-70799>End_Object
-70800>
-70800>Start_UI
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
-70801>
+70785>>>        Procedure OnClick
+70788>>>            Integer iFail
+70788>>>            
+70788>>>            Get DeleteAllDogs to iFail
+70789>>>            If (not(iFail)) Send Beginning_of_Data to oPooch_Grid
+70792>>>        End_Procedure // OnClick
+70793>>>    End_Object    // oDeleteBtn
+70794>>>
+70794>>>    Object oImportGrp is a Group
+70796>>>        Set Size to 58 211
+70797>>>        Set Location to 202 14
+70798>>>        Set peAnchors to anBottomLeftRight
+70799>>>        Set Label to "Import"
+70800>>>
+70800>>>        Object oOpenImport is a OpenDialog
+70802>>>            Set Dialog_Caption to "Select a file"
+70803>>>            Set Filter_String to "Comma Separated Value|*.csv"
+70804>>>        End_Object    // oOpenImport
+70805>>>
+70805>>>        Object oInputPath is a Form
+70807>>>            Set Label to "Input File (.csv)"
+70808>>>            Set Size to 13 141
+70809>>>            Set Location to 20 4
+70810>>>            Set peAnchors to anLeftRight
+70811>>>            Set Label_Col_Offset to 0
+70812>>>            Set Label_Justification_Mode to jMode_Top
+70813>>>        End_Object    // oInputPath
+70814>>>
+70814>>>        Object oBrowse is a Button
+70816>>>            Set Label to "Browse"
+70817>>>            Set Location to 18 154
+70818>>>            Set peAnchors to anBottomRight
+70819>>>
+70819>>>
+70819>>>            Procedure OnClick
+70822>>>                Boolean bOk
+70822>>>                
+70822>>>                Get Show_Dialog of oOpenImport To bOk
+70823>>>                
+70823>>>                If (bOk) Begin
+70825>>>                    Set Value of oInputPath to (File_Name(oOpenImport))
+70826>>>                End
+70826>>>>
+70826>>>            End_Procedure // OnClick
+70827>>>        End_Object    // oBrowse
+70828>>>
+70828>>>        Object oImport_Btn is a Button
+70830>>>            Set Label to "Import"
+70831>>>            Set Location to 42 155
+70832>>>            Set peAnchors to anBottomRight
+70833>>>
+70833>>>            Procedure OnClick
+70836>>>                Boolean bFail
+70836>>>                
+70836>>>                Get ImportDogs (Value(oInputPath)) to bFail
+70837>>>            End_Procedure // OnClick
+70838>>>        End_Object    // oImport_Btn
+70839>>>
+70839>>>    End_Object    // oImportGrp
+70840>>>
+70840>>>    Object oReportGrp is a Group
+70842>>>        Set Size to 75 210
+70843>>>        Set Location to 185 242
+70844>>>        Set peAnchors to anBottomRight
+70845>>>        Set Label to "Report"
+70846>>>        
+70846>>>        Object oOutputFile is a Form
+70848>>>            Set Label to "Output File Name"
+70849>>>            Set Size to 13 85
+70850>>>            Set Location to 18 109
+70851>>>            Set peAnchors to anBottomRight
+70852>>>            Set Label_Col_Offset to 0
+70853>>>            Set Label_Justification_Mode to jMode_Top
+70854>>>        End_Object    // oOutputFile
+70855>>>
+70855>>>        Object oTextBox1 is a TextBox
+70857>>>            Set Size to 10 50
+70858>>>            Set Location to 32 111
+70859>>>            Set Label to '(Folder same as input file.)'
+70860>>>        End_Object
+70861>>>
+70861>>>        Object oReport is a Button
+70863>>>            Set Label to "Report"
+70864>>>            Set Location to 52 142
+70865>>>            Set peAnchors to anBottomRight
+70866>>>
+70866>>>            Procedure OnClick
+70869>>>                String sOutputPath
+70869>>>                
+70869>>>                Get GetOutputPath to sOutputPath
+70870>>>                
+70870>>>                Send GenerateReport sOutputPath
+70871>>>            End_Procedure // OnClick
+70872>>>        End_Object    // oReport
+70873>>>
+70873>>>        Object oRadioGroup1 is a RadioGroup
+70875>>>            Set Location to 14 13
+70876>>>            Set Size to 54 85
+70877>>>            Set Label to 'Sort by'
+70878>>>        
+70878>>>            Object oRadioName is a Radio
+70880>>>                Set Label to "Name Breed Age"
+70881>>>                Set Size to 10 65
+70882>>>                Set Location to 10 5
+70883>>>            End_Object
+70884>>>        
+70884>>>            Object oRadioBreed is a Radio
+70886>>>                Set Label to "Breed Name Age"
+70887>>>                Set Size to 10 65
+70888>>>                Set Location to 25 5
+70889>>>            End_Object
+70890>>>        
+70890>>>            Object oRadioAge is a Radio
+70892>>>                Set Label to "Age Breed Name"
+70893>>>                Set Size to 10 65
+70894>>>                Set Location to 40 5
+70895>>>            End_Object
+70896>>>        
+70896>>>            Procedure Notify_Select_State Integer iToItem Integer iFromItem
+70899>>>                Forward Send Notify_Select_State iToItem iFromItem
+70901>>>                //for augmentation
+70901>>>            End_Procedure
+70902>>>        
+70902>>>            //If you set Current_Radio, you must set it AFTER the
+70902>>>            //radio objects have been created AND AFTER Notify_Select_State has been
+70902>>>            //created. i.e. Set in bottom-code of object at the end!!
+70902>>>        
+70902>>>            //Set Current_Radio To 0
+70902>>>        
+70902>>>        End_Object
+70903>>>
+70903>>>    End_Object    // oReportGrp
+70904>>>
+70904>>>    Function DeleteAllDogs Returns Integer
+70907>>>        Integer iRetVal iResponse
+70907>>>        String sMsg
+70907>>>        Boolean bFound
+70907>>>        
+70907>>>        Move 0 to iRetVal
+70908>>>
+70908>>>        Move "Are you sure you want to delete all dogs?" to sMsg
+70909>>>        Move (YesNo_Box(sMsg, "Pooches", MB_DEFBUTTON2)) to iResponse
+70910>>>        
+70910>>>        If (iResponse = MBR_Yes) Begin
+70912>>>            Repeat
+70912>>>>
+70912>>>                Lock
+70913>>>>
+70913>>>                    Find GT POOCH by Recnum
+70914>>>>
+70914>>>                    Move (Found) to bFound
+70915>>>                    If (bFound) Begin
+70917>>>                        Delete POOCH  
+70918>>>                    End
+70918>>>>
+70918>>>                Unlock
+70919>>>>
+70919>>>            Until (not(bFound))
+70921>>>        End
+70921>>>>
+70921>>>        Else Move 1 to iRetVal
+70923>>>
+70923>>>        Function_Return iRetVal
+70924>>>    End_Function
+70925>>>    
+70925>>>    Function ImportDogs String sInputPath Returns Integer
+70928>>>        Integer iInputChannel iAge
+70928>>>        String sName sBreed sMsg
+70928>>>        Boolean bFail
+70928>>>        
+70928>>>        If (sInputPath = "") Begin
+70930>>>            Send Stop_Box "You must specify an input file path." (psMBLabel(Self))
+70931>>>            Move True to bFail  
+70932>>>        End        
+70932>>>>
+70932>>>        
+70932>>>        If (not(bFail)) Begin
+70934>>>            Get Seq_New_Channel to iInputChannel
+70935>>>            
+70935>>>            If (iInputChannel = DF_SEQ_CHANNEL_NOT_AVAILABLE) Begin
+70937>>>                Send Stop_Box "No file channel available for input." (psMBLabel(Self))
+70938>>>                Move True to bFail
+70939>>>            End
+70939>>>>
+70939>>>        End
+70939>>>>
+70939>>>        
+70939>>>        If (not(bFail)) Begin
+70941>>>            Direct_Input channel iInputChannel sInputPath
+70943>>>            If (not(SeqEof)) Begin
+70945>>>                Repeat
+70945>>>>
+70945>>>                    Read channel iInputChannel sName sBreed iAge
+70949>>>                    Readln
+70950>>>                    
+70950>>>                    If (sName <> "") Begin
+70952>>>                        Send AddDog sName sBreed iAge
+70953>>>                    End
+70953>>>>
+70953>>>                Until (SeqEof)
+70955>>>            End
+70955>>>>
+70955>>>            Else Begin
+70956>>>                Move (sInputPath + " is not a valid input path.") to sMsg
+70957>>>                Send Stop_Box sMsg (psMBLabel(Self))
+70958>>>                Move True to bFail
+70959>>>            End
+70959>>>>
+70959>>>            Close_Input channel iInputChannel
+70961>>>            Send Seq_Release_Channel iInputChannel
+70962>>>        End
+70962>>>>
+70962>>>        
+70962>>>        Function_Return bFail
+70963>>>    End_Function
+70964>>>    
+70964>>>    Procedure AddDog String sName String sBreed Integer iAge
+70967>>>        Boolean bFail
+70967>>>        
+70967>>>        Move False to bFail
+70968>>>        
+70968>>>        Send Clear of oPooch_DD
+70969>>>        Move sName to POOCH.NAME
+70970>>>        Find EQ POOCH by Index.1
+70971>>>>
+70971>>>        If (not(Found)) Begin
+70973>>>            Set Field_Changed_Value of oPooch_DD Field POOCH.NAME to sName
+70974>>>            Set Field_Changed_Value of oPooch_DD Field POOCH.BREED to sBreed
+70975>>>            Set Field_Changed_Value of oPooch_DD Field POOCH.AGE to iAge
+70976>>>            Get Request_Validate of oPooch_DD to bFail
+70977>>>            If (not(bFail)) Send Request_Save of oPooch_DD
+70980>>>        End 
+70980>>>>
+70980>>>    End_Procedure
+70981>>>    
+70981>>>    Function GetOutputPath Returns String
+70984>>>        String sFileName sFilePath sCompletePath
+70984>>>        Integer iRightPos
+70984>>>        
+70984>>>        Move (Value(oOutputFile)) to sFileName
+70985>>>        
+70985>>>        If (sFileName <> "") Begin
+70987>>>            Move (Value(oInputPath)) to sFilePath
+70988>>>            Move (RightPos("\", sFilePath)) to iRightPos
+70989>>>            Move (Left(sFilePath, iRightPos)) to sFilePath
+70990>>>            Move (sFilePath + sFileName) to sCompletePath
+70991>>>        End
+70991>>>>
+70991>>>               
+70991>>>        Function_Return sCompletePath
+70992>>>    End_Function
+70993>>>    
+70993>>>    Procedure GenerateReport String sOutputPath
+70996>>>        String sMsg
+70996>>>        String[] asSortArray
+70997>>>        Integer iCount iOutputChannel iLoopCnt
+70997>>>        Boolean bFound bFail
+70997>>>        
+70997>>>        If (sOutputPath = "") Begin
+70999>>>            Send Stop_Box "You must specify an output filename." (psMBLabel(Self))
+71000>>>            Move True to bFail
+71001>>>        End
+71001>>>>
+71001>>>        
+71001>>>        If (not(bFail)) Begin
+71003>>>            Get Seq_New_Channel to iOutputChannel
+71004>>>            
+71004>>>            If (iOutputChannel = DF_SEQ_CHANNEL_NOT_AVAILABLE) Begin
+71006>>>                Send Stop_Box "No file channel available for output." (psMBLabel(Self))
+71007>>>                Move True to bFail
+71008>>>            End
+71008>>>>
+71008>>>        End
+71008>>>>
+71008>>>        
+71008>>>        If (not(bFail)) Begin
+71010>>>            Direct_Output channel iOutputChannel sOutputPath
+71012>>>            If (not(SeqEof)) Begin        
+71014>>>                Clear POOCH
+71015>>>                Move 0 to iCount
+71016>>>                
+71016>>>                Repeat
+71016>>>>
+71016>>>                    Find GT POOCH by RecNum
+71017>>>>
+71017>>>                    Move (Found) to bFound
+71018>>>                    If (bFound) Begin
+71020>>>                        Get BuildSortString POOCH.NAME POOCH.BREED POOCH.AGE to asSortArray[iCount]
+71021>>>                        Increment iCount
+71022>>>                    End
+71022>>>>
+71022>>>                Until (not(bFound))
+71024>>>                
+71024>>>                If (SizeOfArray(asSortArray)) Begin
+71026>>>                    Move (SortArray(asSortArray)) to asSortArray
+71027>>>                End
+71027>>>>
+71027>>>                
+71027>>>                Decrement iCount
+71028>>>                For iLoopCnt from 0 to iCount
+71034>>>>
+71034>>>                    Writeln channel iOutputChannel asSortArray[iLoopCnt]
+71037>>>                Loop
+71038>>>>
+71038>>>            End
+71038>>>>
+71038>>>            Else Begin
+71039>>>                Move (sOutputPath + " is not a valid output path.") to sMsg
+71040>>>                Send Stop_Box sMsg (psMBLabel(Self))
+71041>>>                Move True to bFail                
+71042>>>            End
+71042>>>>
+71042>>>            Close_Output channel iOutputChannel
+71044>>>            Send Seq_Release_Channel iOutputChannel
+71045>>>            Send Info_Box ("Report written to " + sOutputPath) (psMBLabel(Self))
+71046>>>        End        
+71046>>>>
+71046>>>                
+71046>>>    End_Procedure
+71047>>>    
+71047>>>    Function BuildSortString String sName String sBreed Integer iAge Returns String
+71050>>>        String sRetString sAge
+71050>>>        
+71050>>>        Move (String(iAge)) to sAge
+71051>>>        If (Length(sAge) = 1) Move (" " + sAge) to sAge
+71054>>>        
+71054>>>        Case Begin
+71054>>>            Case (Checked_State(oRadioName))
+71056>>>                Move (sName + "  " + sBreed + "  " + sAge) to sRetString
+71057>>>                Case Break
+71058>>>            Case (Checked_State(oRadioBreed))
+71061>>>                Move (sBreed + "  " + sName + "  " + sAge) to sRetString
+71062>>>                Case Break
+71063>>>            Case (Checked_State(oRadioAge))
+71066>>>                Move (sAge + "  " + sBreed + "  " + sName) to sRetString
+71067>>>                Case Break
+71068>>>        Case End
+71068>>>        
+71068>>>        Function_Return sRetString
+71069>>>    End_Function
+71070>>>    
+71070>>>CD_End_Object    // oPoochesView
+71072>>>>
+71072>
+71072>        Procedure Activate_About
+71075>            Send DoAbout "" "" "" "" ""
+71076>        End_Procedure
+71077>
+71077>    End_Object
+71078>
+71078>End_Object
+71079>
+71079>Start_UI
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
+71080>
 Summary
 Memory Available: 2147483647
 Total Warnings : 0
 Total Errors   : 0
-Total Symbols  : 40305
+Total Symbols  : 40408
 Total Resources: 0
-Total Commands : 70800
+Total Commands : 71079
 Total Windows  : 1
 Total Pages    : 1
-Static Data    : 426812
-Message area   : 491092
-Total Blocks   : 25383
+Static Data    : 429487
+Message area   : 492385
+Total Blocks   : 25470
