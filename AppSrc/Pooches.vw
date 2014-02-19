@@ -119,9 +119,10 @@ Object oPoochesView is a dbView
             Set peAnchors to anBottomRight
 
             Procedure OnClick
-                Boolean bFail
+                Integer iFail
                 
-                Get ImportDogs (Value(oInputPath)) to bFail
+                Get ImportDogs (Value(oInputPath)) to iFail
+                If (not(iFail)) Send Beginning_of_Data to oPooch_Grid
             End_Procedure // OnClick
         End_Object    // oImport_Btn
 
@@ -201,16 +202,17 @@ Object oPoochesView is a dbView
     End_Object    // oReportGrp
 
     Function DeleteAllDogs Returns Integer
-        Integer iRetVal iResponse
+        Integer iFail iResponse
         String sMsg
         Boolean bFound
         
-        Move 0 to iRetVal
+        Move 0 to iFail
 
         Move "Are you sure you want to delete all dogs?" to sMsg
         Move (YesNo_Box(sMsg, "Pooches", MB_DEFBUTTON2)) to iResponse
         
         If (iResponse = MBR_Yes) Begin
+            Clear POOCH
             Repeat
                 Lock
                     Find GT POOCH by Recnum
@@ -221,31 +223,31 @@ Object oPoochesView is a dbView
                 Unlock
             Until (not(bFound))
         End
-        Else Move 1 to iRetVal
+        Else Move 1 to iFail
 
-        Function_Return iRetVal
+        Function_Return iFail
     End_Function
     
     Function ImportDogs String sInputPath Returns Integer
         Integer iInputChannel iAge
         String sName sBreed sMsg
-        Boolean bFail
+        Integer iFail
         
         If (sInputPath = "") Begin
             Send Stop_Box "You must specify an input file path." (psMBLabel(Self))
-            Move True to bFail  
+            Move 1 to iFail  
         End        
         
-        If (not(bFail)) Begin
+        If (not(iFail)) Begin
             Get Seq_New_Channel to iInputChannel
             
             If (iInputChannel = DF_SEQ_CHANNEL_NOT_AVAILABLE) Begin
                 Send Stop_Box "No file channel available for input." (psMBLabel(Self))
-                Move True to bFail
+                Move 1 to iFail
             End
         End
         
-        If (not(bFail)) Begin
+        If (not(iFail)) Begin
             Direct_Input channel iInputChannel sInputPath
             If (not(SeqEof)) Begin
                 Repeat
@@ -260,13 +262,13 @@ Object oPoochesView is a dbView
             Else Begin
                 Move (sInputPath + " is not a valid input path.") to sMsg
                 Send Stop_Box sMsg (psMBLabel(Self))
-                Move True to bFail
+                Move 1 to iFail
             End
             Close_Input channel iInputChannel
             Send Seq_Release_Channel iInputChannel
         End
         
-        Function_Return bFail
+        Function_Return iFail
     End_Function
     
     Procedure AddDog String sName String sBreed Integer iAge
@@ -294,8 +296,16 @@ Object oPoochesView is a dbView
         
         If (sFileName <> "") Begin
             Move (Value(oInputPath)) to sFilePath
-            Move (RightPos("\", sFilePath)) to iRightPos
-            Move (Left(sFilePath, iRightPos)) to sFilePath
+            
+            If (sFilePath <> "") Begin
+                Move (RightPos("\", sFilePath)) to iRightPos
+                Move (Left(sFilePath, iRightPos)) to sFilePath    
+            End
+            // get the default file path
+            Else Begin
+                Move (psDataPath(phoWorkspace(ghoApplication)) + "\") to sFilePath
+            End
+            
             Move (sFilePath + sFileName) to sCompletePath
         End
                

@@ -1948,353 +1948,368 @@ Including file: Pooch.FD    (C:\Users\philip.waller\Documents\Training\Assignmen
 70832>>>            Set peAnchors to anBottomRight
 70833>>>
 70833>>>            Procedure OnClick
-70836>>>                Boolean bFail
+70836>>>                Integer iFail
 70836>>>                
-70836>>>                Get ImportDogs (Value(oInputPath)) to bFail
-70837>>>            End_Procedure // OnClick
-70838>>>        End_Object    // oImport_Btn
-70839>>>
-70839>>>    End_Object    // oImportGrp
-70840>>>
-70840>>>    Object oReportGrp is a Group
-70842>>>        Set Size to 75 210
-70843>>>        Set Location to 185 242
-70844>>>        Set peAnchors to anBottomRight
-70845>>>        Set Label to "Report"
-70846>>>        
-70846>>>        Object oOutputFile is a Form
-70848>>>            Set Label to "Output File Name"
-70849>>>            Set Size to 13 85
-70850>>>            Set Location to 18 109
-70851>>>            Set peAnchors to anBottomRight
-70852>>>            Set Label_Col_Offset to 0
-70853>>>            Set Label_Justification_Mode to jMode_Top
-70854>>>        End_Object    // oOutputFile
-70855>>>
-70855>>>        Object oTextBox1 is a TextBox
-70857>>>            Set Size to 10 50
-70858>>>            Set Location to 32 111
-70859>>>            Set Label to '(Folder same as input file.)'
-70860>>>        End_Object
-70861>>>
-70861>>>        Object oReport is a Button
-70863>>>            Set Label to "Report"
-70864>>>            Set Location to 52 142
-70865>>>            Set peAnchors to anBottomRight
-70866>>>
-70866>>>            Procedure OnClick
-70869>>>                String sOutputPath
-70869>>>                
-70869>>>                Get GetOutputPath to sOutputPath
-70870>>>                
-70870>>>                Send GenerateReport sOutputPath
-70871>>>            End_Procedure // OnClick
-70872>>>        End_Object    // oReport
-70873>>>
-70873>>>        Object oRadioGroup1 is a RadioGroup
-70875>>>            Set Location to 14 13
-70876>>>            Set Size to 54 85
-70877>>>            Set Label to 'Sort by'
-70878>>>        
-70878>>>            Object oRadioName is a Radio
-70880>>>                Set Label to "Name Breed Age"
-70881>>>                Set Size to 10 65
-70882>>>                Set Location to 10 5
-70883>>>            End_Object
-70884>>>        
-70884>>>            Object oRadioBreed is a Radio
-70886>>>                Set Label to "Breed Name Age"
-70887>>>                Set Size to 10 65
-70888>>>                Set Location to 25 5
-70889>>>            End_Object
-70890>>>        
-70890>>>            Object oRadioAge is a Radio
-70892>>>                Set Label to "Age Breed Name"
-70893>>>                Set Size to 10 65
-70894>>>                Set Location to 40 5
-70895>>>            End_Object
-70896>>>        
-70896>>>            Procedure Notify_Select_State Integer iToItem Integer iFromItem
-70899>>>                Forward Send Notify_Select_State iToItem iFromItem
-70901>>>                //for augmentation
-70901>>>            End_Procedure
-70902>>>        
-70902>>>            //If you set Current_Radio, you must set it AFTER the
-70902>>>            //radio objects have been created AND AFTER Notify_Select_State has been
-70902>>>            //created. i.e. Set in bottom-code of object at the end!!
-70902>>>        
-70902>>>            //Set Current_Radio To 0
-70902>>>        
-70902>>>        End_Object
-70903>>>
-70903>>>    End_Object    // oReportGrp
-70904>>>
-70904>>>    Function DeleteAllDogs Returns Integer
-70907>>>        Integer iRetVal iResponse
-70907>>>        String sMsg
-70907>>>        Boolean bFound
-70907>>>        
-70907>>>        Move 0 to iRetVal
-70908>>>
-70908>>>        Move "Are you sure you want to delete all dogs?" to sMsg
-70909>>>        Move (YesNo_Box(sMsg, "Pooches", MB_DEFBUTTON2)) to iResponse
+70836>>>                Get ImportDogs (Value(oInputPath)) to iFail
+70837>>>                If (not(iFail)) Send Beginning_of_Data to oPooch_Grid
+70840>>>            End_Procedure // OnClick
+70841>>>        End_Object    // oImport_Btn
+70842>>>
+70842>>>    End_Object    // oImportGrp
+70843>>>
+70843>>>    Object oReportGrp is a Group
+70845>>>        Set Size to 75 210
+70846>>>        Set Location to 185 242
+70847>>>        Set peAnchors to anBottomRight
+70848>>>        Set Label to "Report"
+70849>>>        
+70849>>>        Object oOutputFile is a Form
+70851>>>            Set Label to "Output File Name"
+70852>>>            Set Size to 13 85
+70853>>>            Set Location to 18 109
+70854>>>            Set peAnchors to anBottomRight
+70855>>>            Set Label_Col_Offset to 0
+70856>>>            Set Label_Justification_Mode to jMode_Top
+70857>>>        End_Object    // oOutputFile
+70858>>>
+70858>>>        Object oTextBox1 is a TextBox
+70860>>>            Set Size to 10 50
+70861>>>            Set Location to 32 111
+70862>>>            Set Label to '(Folder same as input file.)'
+70863>>>        End_Object
+70864>>>
+70864>>>        Object oReport is a Button
+70866>>>            Set Label to "Report"
+70867>>>            Set Location to 52 142
+70868>>>            Set peAnchors to anBottomRight
+70869>>>
+70869>>>            Procedure OnClick
+70872>>>                String sOutputPath
+70872>>>                
+70872>>>                Get GetOutputPath to sOutputPath
+70873>>>                
+70873>>>                Send GenerateReport sOutputPath
+70874>>>            End_Procedure // OnClick
+70875>>>        End_Object    // oReport
+70876>>>
+70876>>>        Object oRadioGroup1 is a RadioGroup
+70878>>>            Set Location to 14 13
+70879>>>            Set Size to 54 85
+70880>>>            Set Label to 'Sort by'
+70881>>>        
+70881>>>            Object oRadioName is a Radio
+70883>>>                Set Label to "Name Breed Age"
+70884>>>                Set Size to 10 65
+70885>>>                Set Location to 10 5
+70886>>>            End_Object
+70887>>>        
+70887>>>            Object oRadioBreed is a Radio
+70889>>>                Set Label to "Breed Name Age"
+70890>>>                Set Size to 10 65
+70891>>>                Set Location to 25 5
+70892>>>            End_Object
+70893>>>        
+70893>>>            Object oRadioAge is a Radio
+70895>>>                Set Label to "Age Breed Name"
+70896>>>                Set Size to 10 65
+70897>>>                Set Location to 40 5
+70898>>>            End_Object
+70899>>>        
+70899>>>            Procedure Notify_Select_State Integer iToItem Integer iFromItem
+70902>>>                Forward Send Notify_Select_State iToItem iFromItem
+70904>>>                //for augmentation
+70904>>>            End_Procedure
+70905>>>        
+70905>>>            //If you set Current_Radio, you must set it AFTER the
+70905>>>            //radio objects have been created AND AFTER Notify_Select_State has been
+70905>>>            //created. i.e. Set in bottom-code of object at the end!!
+70905>>>        
+70905>>>            //Set Current_Radio To 0
+70905>>>        
+70905>>>        End_Object
+70906>>>
+70906>>>    End_Object    // oReportGrp
+70907>>>
+70907>>>    Function DeleteAllDogs Returns Integer
+70910>>>        Integer iFail iResponse
+70910>>>        String sMsg
+70910>>>        Boolean bFound
 70910>>>        
-70910>>>        If (iResponse = MBR_Yes) Begin
-70912>>>            Repeat
-70912>>>>
-70912>>>                Lock
-70913>>>>
-70913>>>                    Find GT POOCH by Recnum
-70914>>>>
-70914>>>                    Move (Found) to bFound
-70915>>>                    If (bFound) Begin
-70917>>>                        Delete POOCH  
-70918>>>                    End
+70910>>>        Move 0 to iFail
+70911>>>
+70911>>>        Move "Are you sure you want to delete all dogs?" to sMsg
+70912>>>        Move (YesNo_Box(sMsg, "Pooches", MB_DEFBUTTON2)) to iResponse
+70913>>>        
+70913>>>        If (iResponse = MBR_Yes) Begin
+70915>>>            Clear POOCH
+70916>>>            Repeat
+70916>>>>
+70916>>>                Lock
+70917>>>>
+70917>>>                    Find GT POOCH by Recnum
 70918>>>>
-70918>>>                Unlock
-70919>>>>
-70919>>>            Until (not(bFound))
-70921>>>        End
-70921>>>>
-70921>>>        Else Move 1 to iRetVal
-70923>>>
-70923>>>        Function_Return iRetVal
-70924>>>    End_Function
-70925>>>    
-70925>>>    Function ImportDogs String sInputPath Returns Integer
-70928>>>        Integer iInputChannel iAge
-70928>>>        String sName sBreed sMsg
-70928>>>        Boolean bFail
-70928>>>        
-70928>>>        If (sInputPath = "") Begin
-70930>>>            Send Stop_Box "You must specify an input file path." (psMBLabel(Self))
-70931>>>            Move True to bFail  
-70932>>>        End        
-70932>>>>
+70918>>>                    Move (Found) to bFound
+70919>>>                    If (bFound) Begin
+70921>>>                        Delete POOCH  
+70922>>>                    End
+70922>>>>
+70922>>>                Unlock
+70923>>>>
+70923>>>            Until (not(bFound))
+70925>>>        End
+70925>>>>
+70925>>>        Else Move 1 to iFail
+70927>>>
+70927>>>        Function_Return iFail
+70928>>>    End_Function
+70929>>>    
+70929>>>    Function ImportDogs String sInputPath Returns Integer
+70932>>>        Integer iInputChannel iAge
+70932>>>        String sName sBreed sMsg
+70932>>>        Integer iFail
 70932>>>        
-70932>>>        If (not(bFail)) Begin
-70934>>>            Get Seq_New_Channel to iInputChannel
-70935>>>            
-70935>>>            If (iInputChannel = DF_SEQ_CHANNEL_NOT_AVAILABLE) Begin
-70937>>>                Send Stop_Box "No file channel available for input." (psMBLabel(Self))
-70938>>>                Move True to bFail
-70939>>>            End
-70939>>>>
-70939>>>        End
-70939>>>>
-70939>>>        
-70939>>>        If (not(bFail)) Begin
-70941>>>            Direct_Input channel iInputChannel sInputPath
-70943>>>            If (not(SeqEof)) Begin
-70945>>>                Repeat
-70945>>>>
-70945>>>                    Read channel iInputChannel sName sBreed iAge
-70949>>>                    Readln
-70950>>>                    
-70950>>>                    If (sName <> "") Begin
-70952>>>                        Send AddDog sName sBreed iAge
-70953>>>                    End
-70953>>>>
-70953>>>                Until (SeqEof)
-70955>>>            End
-70955>>>>
-70955>>>            Else Begin
-70956>>>                Move (sInputPath + " is not a valid input path.") to sMsg
-70957>>>                Send Stop_Box sMsg (psMBLabel(Self))
-70958>>>                Move True to bFail
+70932>>>        If (sInputPath = "") Begin
+70934>>>            Send Stop_Box "You must specify an input file path." (psMBLabel(Self))
+70935>>>            Move 1 to iFail  
+70936>>>        End        
+70936>>>>
+70936>>>        
+70936>>>        If (not(iFail)) Begin
+70938>>>            Get Seq_New_Channel to iInputChannel
+70939>>>            
+70939>>>            If (iInputChannel = DF_SEQ_CHANNEL_NOT_AVAILABLE) Begin
+70941>>>                Send Stop_Box "No file channel available for input." (psMBLabel(Self))
+70942>>>                Move 1 to iFail
+70943>>>            End
+70943>>>>
+70943>>>        End
+70943>>>>
+70943>>>        
+70943>>>        If (not(iFail)) Begin
+70945>>>            Direct_Input channel iInputChannel sInputPath
+70947>>>            If (not(SeqEof)) Begin
+70949>>>                Repeat
+70949>>>>
+70949>>>                    Read channel iInputChannel sName sBreed iAge
+70953>>>                    Readln
+70954>>>                    
+70954>>>                    If (sName <> "") Begin
+70956>>>                        Send AddDog sName sBreed iAge
+70957>>>                    End
+70957>>>>
+70957>>>                Until (SeqEof)
 70959>>>            End
 70959>>>>
-70959>>>            Close_Input channel iInputChannel
-70961>>>            Send Seq_Release_Channel iInputChannel
-70962>>>        End
-70962>>>>
-70962>>>        
-70962>>>        Function_Return bFail
-70963>>>    End_Function
-70964>>>    
-70964>>>    Procedure AddDog String sName String sBreed Integer iAge
-70967>>>        Boolean bFail
-70967>>>        
-70967>>>        Move False to bFail
-70968>>>        
-70968>>>        Send Clear of oPooch_DD
-70969>>>        Move sName to POOCH.NAME
-70970>>>        Find EQ POOCH by Index.1
-70971>>>>
-70971>>>        If (not(Found)) Begin
-70973>>>            Set Field_Changed_Value of oPooch_DD Field POOCH.NAME to sName
-70974>>>            Set Field_Changed_Value of oPooch_DD Field POOCH.BREED to sBreed
-70975>>>            Set Field_Changed_Value of oPooch_DD Field POOCH.AGE to iAge
-70976>>>            Get Request_Validate of oPooch_DD to bFail
-70977>>>            If (not(bFail)) Send Request_Save of oPooch_DD
-70980>>>        End 
-70980>>>>
-70980>>>    End_Procedure
-70981>>>    
-70981>>>    Function GetOutputPath Returns String
-70984>>>        String sFileName sFilePath sCompletePath
-70984>>>        Integer iRightPos
-70984>>>        
-70984>>>        Move (Value(oOutputFile)) to sFileName
-70985>>>        
-70985>>>        If (sFileName <> "") Begin
-70987>>>            Move (Value(oInputPath)) to sFilePath
-70988>>>            Move (RightPos("\", sFilePath)) to iRightPos
-70989>>>            Move (Left(sFilePath, iRightPos)) to sFilePath
-70990>>>            Move (sFilePath + sFileName) to sCompletePath
-70991>>>        End
-70991>>>>
-70991>>>               
-70991>>>        Function_Return sCompletePath
-70992>>>    End_Function
-70993>>>    
-70993>>>    Procedure GenerateReport String sOutputPath
-70996>>>        String sMsg
-70996>>>        String[] asSortArray
-70997>>>        Integer iCount iOutputChannel iLoopCnt
-70997>>>        Boolean bFound bFail
-70997>>>        
-70997>>>        If (sOutputPath = "") Begin
-70999>>>            Send Stop_Box "You must specify an output filename." (psMBLabel(Self))
-71000>>>            Move True to bFail
-71001>>>        End
-71001>>>>
-71001>>>        
-71001>>>        If (not(bFail)) Begin
-71003>>>            Get Seq_New_Channel to iOutputChannel
-71004>>>            
-71004>>>            If (iOutputChannel = DF_SEQ_CHANNEL_NOT_AVAILABLE) Begin
-71006>>>                Send Stop_Box "No file channel available for output." (psMBLabel(Self))
-71007>>>                Move True to bFail
-71008>>>            End
-71008>>>>
-71008>>>        End
-71008>>>>
-71008>>>        
-71008>>>        If (not(bFail)) Begin
-71010>>>            Direct_Output channel iOutputChannel sOutputPath
-71012>>>            If (not(SeqEof)) Begin        
-71014>>>                Clear POOCH
-71015>>>                Move 0 to iCount
-71016>>>                
-71016>>>                Repeat
+70959>>>            Else Begin
+70960>>>                Move (sInputPath + " is not a valid input path.") to sMsg
+70961>>>                Send Stop_Box sMsg (psMBLabel(Self))
+70962>>>                Move 1 to iFail
+70963>>>            End
+70963>>>>
+70963>>>            Close_Input channel iInputChannel
+70965>>>            Send Seq_Release_Channel iInputChannel
+70966>>>        End
+70966>>>>
+70966>>>        
+70966>>>        Function_Return iFail
+70967>>>    End_Function
+70968>>>    
+70968>>>    Procedure AddDog String sName String sBreed Integer iAge
+70971>>>        Boolean bFail
+70971>>>        
+70971>>>        Move False to bFail
+70972>>>        
+70972>>>        Send Clear of oPooch_DD
+70973>>>        Move sName to POOCH.NAME
+70974>>>        Find EQ POOCH by Index.1
+70975>>>>
+70975>>>        If (not(Found)) Begin
+70977>>>            Set Field_Changed_Value of oPooch_DD Field POOCH.NAME to sName
+70978>>>            Set Field_Changed_Value of oPooch_DD Field POOCH.BREED to sBreed
+70979>>>            Set Field_Changed_Value of oPooch_DD Field POOCH.AGE to iAge
+70980>>>            Get Request_Validate of oPooch_DD to bFail
+70981>>>            If (not(bFail)) Send Request_Save of oPooch_DD
+70984>>>        End 
+70984>>>>
+70984>>>    End_Procedure
+70985>>>    
+70985>>>    Function GetOutputPath Returns String
+70988>>>        String sFileName sFilePath sCompletePath
+70988>>>        Integer iRightPos
+70988>>>        
+70988>>>        Move (Value(oOutputFile)) to sFileName
+70989>>>        
+70989>>>        If (sFileName <> "") Begin
+70991>>>            Move (Value(oInputPath)) to sFilePath
+70992>>>            
+70992>>>            If (sFilePath <> "") Begin
+70994>>>                Move (RightPos("\", sFilePath)) to iRightPos
+70995>>>                Move (Left(sFilePath, iRightPos)) to sFilePath    
+70996>>>            End
+70996>>>>
+70996>>>            // get the default file path
+70996>>>            Else Begin
+70997>>>                Move (psDataPath(phoWorkspace(ghoApplication)) + "\") to sFilePath
+70998>>>            End
+70998>>>>
+70998>>>            
+70998>>>            Move (sFilePath + sFileName) to sCompletePath
+70999>>>        End
+70999>>>>
+70999>>>               
+70999>>>        Function_Return sCompletePath
+71000>>>    End_Function
+71001>>>    
+71001>>>    Procedure GenerateReport String sOutputPath
+71004>>>        String sMsg
+71004>>>        String[] asSortArray
+71005>>>        Integer iCount iOutputChannel iLoopCnt
+71005>>>        Boolean bFound bFail
+71005>>>        
+71005>>>        If (sOutputPath = "") Begin
+71007>>>            Send Stop_Box "You must specify an output filename." (psMBLabel(Self))
+71008>>>            Move True to bFail
+71009>>>        End
+71009>>>>
+71009>>>        
+71009>>>        If (not(bFail)) Begin
+71011>>>            Get Seq_New_Channel to iOutputChannel
+71012>>>            
+71012>>>            If (iOutputChannel = DF_SEQ_CHANNEL_NOT_AVAILABLE) Begin
+71014>>>                Send Stop_Box "No file channel available for output." (psMBLabel(Self))
+71015>>>                Move True to bFail
+71016>>>            End
 71016>>>>
-71016>>>                    Find GT POOCH by RecNum
-71017>>>>
-71017>>>                    Move (Found) to bFound
-71018>>>                    If (bFound) Begin
-71020>>>                        Get BuildSortString POOCH.NAME POOCH.BREED POOCH.AGE to asSortArray[iCount]
-71021>>>                        Increment iCount
-71022>>>                    End
-71022>>>>
-71022>>>                Until (not(bFound))
+71016>>>        End
+71016>>>>
+71016>>>        
+71016>>>        If (not(bFail)) Begin
+71018>>>            Direct_Output channel iOutputChannel sOutputPath
+71020>>>            If (not(SeqEof)) Begin        
+71022>>>                Clear POOCH
+71023>>>                Move 0 to iCount
 71024>>>                
-71024>>>                If (SizeOfArray(asSortArray)) Begin
-71026>>>                    Move (SortArray(asSortArray)) to asSortArray
-71027>>>                End
-71027>>>>
-71027>>>                
-71027>>>                Decrement iCount
-71028>>>                For iLoopCnt from 0 to iCount
-71034>>>>
-71034>>>                    Writeln channel iOutputChannel asSortArray[iLoopCnt]
-71037>>>                Loop
-71038>>>>
-71038>>>            End
-71038>>>>
-71038>>>            Else Begin
-71039>>>                Move (sOutputPath + " is not a valid output path.") to sMsg
-71040>>>                Send Stop_Box sMsg (psMBLabel(Self))
-71041>>>                Move True to bFail                
-71042>>>            End
+71024>>>                // get records and prep for sort
+71024>>>                Repeat
+71024>>>>
+71024>>>                    Find GT POOCH by RecNum
+71025>>>>
+71025>>>                    Move (Found) to bFound
+71026>>>                    If (bFound) Begin
+71028>>>                        Get BuildSortString POOCH.NAME POOCH.BREED POOCH.AGE to asSortArray[iCount]
+71029>>>                        Increment iCount
+71030>>>                    End
+71030>>>>
+71030>>>                Until (not(bFound))
+71032>>>                
+71032>>>                // sort
+71032>>>                If (SizeOfArray(asSortArray)) Begin
+71034>>>                    Move (SortArray(asSortArray)) to asSortArray
+71035>>>                End
+71035>>>>
+71035>>>                
+71035>>>                // write to file
+71035>>>                Decrement iCount
+71036>>>                For iLoopCnt from 0 to iCount
 71042>>>>
-71042>>>            Close_Output channel iOutputChannel
-71044>>>            Send Seq_Release_Channel iOutputChannel
-71045>>>            Send Info_Box ("Report written to " + sOutputPath) (psMBLabel(Self))
-71046>>>        End        
+71042>>>                    Writeln channel iOutputChannel asSortArray[iLoopCnt]
+71045>>>                Loop
 71046>>>>
-71046>>>                
-71046>>>    End_Procedure
-71047>>>    
-71047>>>    Function BuildSortString String sName String sBreed Integer iAge Returns String
-71050>>>        String sRetString sAge
-71050>>>        
-71050>>>        Move (String(iAge)) to sAge
-71051>>>        If (Length(sAge) = 1) Move (" " + sAge) to sAge
-71054>>>        
-71054>>>        Case Begin
-71054>>>            Case (Checked_State(oRadioName))
-71056>>>                Move (sName + "  " + sBreed + "  " + sAge) to sRetString
-71057>>>                Case Break
-71058>>>            Case (Checked_State(oRadioBreed))
-71061>>>                Move (sBreed + "  " + sName + "  " + sAge) to sRetString
-71062>>>                Case Break
-71063>>>            Case (Checked_State(oRadioAge))
-71066>>>                Move (sAge + "  " + sBreed + "  " + sName) to sRetString
-71067>>>                Case Break
-71068>>>        Case End
-71068>>>        
-71068>>>        Function_Return sRetString
-71069>>>    End_Function
-71070>>>    
-71070>>>CD_End_Object    // oPoochesView
-71072>>>>
-71072>
-71072>        Procedure Activate_About
-71075>            Send DoAbout "" "" "" "" ""
-71076>        End_Procedure
-71077>
-71077>    End_Object
-71078>
-71078>End_Object
-71079>
-71079>Start_UI
+71046>>>            End
+71046>>>>
+71046>>>            Else Begin
+71047>>>                Move (sOutputPath + " is not a valid output path.") to sMsg
+71048>>>                Send Stop_Box sMsg (psMBLabel(Self))
+71049>>>                Move True to bFail                
+71050>>>            End
+71050>>>>
+71050>>>            Close_Output channel iOutputChannel
+71052>>>            Send Seq_Release_Channel iOutputChannel
+71053>>>            Send Info_Box ("Report written to " + sOutputPath) (psMBLabel(Self))
+71054>>>        End        
+71054>>>>
+71054>>>                
+71054>>>    End_Procedure
+71055>>>    
+71055>>>    Function BuildSortString String sName String sBreed Integer iAge Returns String
+71058>>>        String sRetString sAge
+71058>>>        
+71058>>>        Move (String(iAge)) to sAge
+71059>>>        If (Length(sAge) = 1) Move (" " + sAge) to sAge
+71062>>>        
+71062>>>        Case Begin
+71062>>>            Case (Checked_State(oRadioName))
+71064>>>                Move (sName + "  " + sBreed + "  " + sAge) to sRetString
+71065>>>                Case Break
+71066>>>            Case (Checked_State(oRadioBreed))
+71069>>>                Move (sBreed + "  " + sName + "  " + sAge) to sRetString
+71070>>>                Case Break
+71071>>>            Case (Checked_State(oRadioAge))
+71074>>>                Move (sAge + "  " + sBreed + "  " + sName) to sRetString
+71075>>>                Case Break
+71076>>>        Case End
+71076>>>        
+71076>>>        Function_Return sRetString
+71077>>>    End_Function
+71078>>>    
+71078>>>CD_End_Object    // oPoochesView
+71080>>>>
 71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
-71080>
+71080>        Procedure Activate_About
+71083>            Send DoAbout "" "" "" "" ""
+71084>        End_Procedure
+71085>
+71085>    End_Object
+71086>
+71086>End_Object
+71087>
+71087>Start_UI
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
+71088>
 Summary
 Memory Available: 2147483647
 Total Warnings : 0
 Total Errors   : 0
-Total Symbols  : 40408
+Total Symbols  : 40412
 Total Resources: 0
-Total Commands : 71079
+Total Commands : 71087
 Total Windows  : 1
 Total Pages    : 1
-Static Data    : 429487
-Message area   : 492385
-Total Blocks   : 25470
+Static Data    : 429595
+Message area   : 492392
+Total Blocks   : 25472
